@@ -25,7 +25,7 @@ class PostStatusService < BaseService
     text   = '.' if text.blank? && !media.empty?
 
     ApplicationRecord.transaction do
-      status = account.statuses.create!(text: "<s>#{text}</s>",
+      status = account.statuses.create!(text: text,
                                         media_attachments: media || [],
                                         thread: in_reply_to,
                                         sensitive: options[:sensitive],
