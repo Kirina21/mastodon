@@ -1,18 +1,16 @@
 class Formatter_GPlus
-  STRIKETHROUGH = /- ([^-]*) -/
-
   def initialize(html)
     @html = html.dup
   end
 
-  def format()
+  def formatted
     result = @html
 
     strike_through(result)
-    return result
+    result
   end
 
-  def strike_through(html)
-    return html.gsub!(/- ([^-]*) -/) { %(<s>$1</s>) }
+  def strike_through(text)
+    text.gsub!(/- ([^-]*) -/) { %(<s>#{text}</s>) }
   end
 end
