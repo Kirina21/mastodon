@@ -136,3 +136,6 @@ group :production do
   gem 'lograge', '~> 0.7'
   gem 'redis-rails', '~> 5.0'
 end
+
+# Added at 2018-03-18 06:20:59 +0000 by mastodon:
+gem "redcarpet", "~> 3.4"
