@@ -1,16 +1,29 @@
+require 'redcarpet'
+require 'redcarpet/render_strip'
+
 class Formatter_GPlus
   def initialize(html)
     @html = html.dup
   end
 
   def formatted
-    result = @html
+    decoration_renderer = DecorationRenderer.new()
+    decorated = Redcarpet::Markdown.new(decoration_renderer)
 
-    strike_through(result)
-    result
+    rendered = decorated.render(@html)
+    rendered
   end
 
-  def strike_through(text)
-    text.gsub!(/- ([^-]*) -/) { "&lt;s&gt;#{$1}&lt;&#x2F;s&gt;" }
+  def encode(html)
+    HTMLEntities.new.encode(html)
+  end
+
+
+
+  class DecorationRenderer < Redcarpet::Render::HTML
+    def strikethrough(text)
+      %(<s>#{encode(text)}</s>)
+      # text.gsub!(/- ([^-]*) -/) { %(<s>#{text}</s>) }
+    end
   end
 end
