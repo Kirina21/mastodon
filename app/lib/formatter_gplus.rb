@@ -11,6 +11,6 @@ class Formatter_GPlus
   end
 
   def strike_through(text)
-    text.gsub!(/- ([^-]*) -/) { %(<s>#{text}</s>) }
+    text.gsub!(/- ([^-]*) -/) { "<s>#{$1}</s>" }
   end
 end
