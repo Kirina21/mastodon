@@ -516,8 +516,6 @@ GEM
     sidekiq-bulk (0.1.1)
       activesupport
       sidekiq
-    sidekiq-failures (1.0.0)
-      sidekiq (>= 4.0.0)
     sidekiq-scheduler (2.1.10)
       redis (>= 3, < 5)
       rufus-scheduler (~> 3.2)
@@ -705,7 +703,6 @@ DEPENDENCIES
   scss_lint (~> 0.55)
   sidekiq (~> 5.0)
   sidekiq-bulk (~> 0.1.1)
-  sidekiq-failures
   sidekiq-scheduler (~> 2.1)
   sidekiq-unique-jobs (~> 5.0)
   simple-navigation (~> 4.0)
