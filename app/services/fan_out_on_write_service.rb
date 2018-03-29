@@ -13,11 +13,7 @@ class FanOutOnWriteService < BaseService
     if status.direct_visibility?
       deliver_to_mentioned_followers(status)
     elsif status.private_visibility?
-      if status.reply?
-        deliver_to_followings_of_repliee(status)
-      else
-        deliver_to_followings(status)
-      end
+      deliver_to_followings(status)
     else
       deliver_to_followers(status)
       deliver_to_lists(status)
