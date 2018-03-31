@@ -15,6 +15,7 @@ import {
   unreblog,
   pin,
   unpin,
+  quote,
 } from '../../actions/interactions';
 import {
   replyCompose,
@@ -132,6 +133,10 @@ export default class Status extends ImmutablePureComponent {
         this.props.dispatch(openModal('BOOST', { status, onReblog: this.handleModalReblog }));
       }
     }
+  }
+
+  handleQuoteClick = (status, e) => {
+    this.props.dispatch(quote(status));
   }
 
   handleDeleteClick = (status) => {
@@ -378,6 +383,7 @@ export default class Status extends ImmutablePureComponent {
                   onReply={this.handleReplyClick}
                   onFavourite={this.handleFavouriteClick}
                   onReblog={this.handleReblogClick}
+                  onQuote={this.handleQuoteClick}
                   onDelete={this.handleDeleteClick}
                   onMention={this.handleMentionClick}
                   onMute={this.handleMuteClick}

@@ -16,6 +16,8 @@ export const UNFAVOURITE_REQUEST = 'UNFAVOURITE_REQUEST';
 export const UNFAVOURITE_SUCCESS = 'UNFAVOURITE_SUCCESS';
 export const UNFAVOURITE_FAIL    = 'UNFAVOURITE_FAIL';
 
+export const QUOTE = 'QUOTE';
+
 export const REBLOGS_FETCH_REQUEST = 'REBLOGS_FETCH_REQUEST';
 export const REBLOGS_FETCH_SUCCESS = 'REBLOGS_FETCH_SUCCESS';
 export const REBLOGS_FETCH_FAIL    = 'REBLOGS_FETCH_FAIL';
@@ -57,6 +59,13 @@ export function unreblog(status) {
     });
   };
 };
+
+export function quote(status) {
+  return {
+    type: QUOTE,
+    status: status
+  };
+}
 
 export function reblogRequest(status) {
   return {

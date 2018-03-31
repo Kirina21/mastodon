@@ -3,6 +3,7 @@ import {
   REBLOG_SUCCESS,
   REBLOG_FAIL,
   UNREBLOG_SUCCESS,
+  QUOTE,
   FAVOURITE_REQUEST,
   FAVOURITE_SUCCESS,
   FAVOURITE_FAIL,
@@ -126,6 +127,8 @@ export default function statuses(state = initialState, action) {
     return state.withMutations(map => {
       action.ids.forEach(id => map.setIn([id, 'hidden'], true));
     });
+  case QUOTE:
+    return normalizeStatus(state, action.response);
   case TIMELINE_REFRESH_SUCCESS:
   case TIMELINE_EXPAND_SUCCESS:
   case CONTEXT_FETCH_SUCCESS:
