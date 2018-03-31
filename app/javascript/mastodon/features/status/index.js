@@ -13,9 +13,9 @@ import {
   unfavourite,
   reblog,
   unreblog,
+  quote,
   pin,
   unpin,
-  quote,
 } from '../../actions/interactions';
 import {
   replyCompose,

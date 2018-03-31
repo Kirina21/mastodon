@@ -1,4 +1,7 @@
 import api from '../api';
+import {
+  changeCompose,
+} from '../actions/compose'
 
 export const REBLOG_REQUEST = 'REBLOG_REQUEST';
 export const REBLOG_SUCCESS = 'REBLOG_SUCCESS';
@@ -61,9 +64,14 @@ export function unreblog(status) {
 };
 
 export function quote(status) {
-  return {
-    type: QUOTE,
-    status: status
+  return (dispatch, getState) => {
+    dispatch(quoteRequest(status));
+
+    changeCompose([
+      "",
+      "~~~~~~~~~~",
+      status.get("url")
+    ].join("\n"));
   };
 }
 
@@ -116,6 +124,13 @@ export function unreblogFail(status, error) {
     status: status,
     error: error,
     skipLoading: true,
+  };
+};
+
+export function quoteRequest(status) {
+  return {
+    type: QUOTE,
+    status: status
   };
 };
 
