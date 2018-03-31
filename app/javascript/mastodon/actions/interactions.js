@@ -67,11 +67,13 @@ export function quote(status) {
   return (dispatch, getState) => {
     dispatch(quoteRequest(status));
 
-    changeCompose([
-      "",
-      "~~~~~~~~~~",
-      status.get("url")
-    ].join("\n"));
+    dispatch(
+      changeCompose([
+        "",
+        "~~~~~~~~~~",
+        status.get("url")
+      ].join("\n"))
+    );
   };
 }
 
