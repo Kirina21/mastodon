@@ -11,6 +11,7 @@ import {
   favourite,
   unreblog,
   unfavourite,
+  quote,
   pin,
   unpin,
 } from '../actions/interactions';
@@ -64,6 +65,10 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
         dispatch(openModal('BOOST', { status, onReblog: this.onModalReblog }));
       }
     }
+  },
+
+  onQuote (status, e) {
+    dispatch(quote(status))
   },
 
   onFavourite (status) {
