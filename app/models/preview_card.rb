@@ -42,7 +42,7 @@ class PreviewCard < ApplicationRecord
   validates_attachment_content_type :image, content_type: IMAGE_MIME_TYPES
   validates_attachment_size :image, less_than: 1.megabytes
 
-  before_save :extract_dimensions, if: :link?
+  before_save :extract_dimensions, if: :link? || :quote?
 
   def save_with_optional_image!
     save!
