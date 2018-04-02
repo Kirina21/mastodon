@@ -29,7 +29,7 @@ class PreviewCard < ApplicationRecord
 
   self.inheritance_column = false
 
-  enum type: [:link, :photo, :video, :rich]
+  enum type: [:link, :photo, :video, :rich, :quote]
 
   has_and_belongs_to_many :statuses
 

@@ -67,7 +67,7 @@ class FetchLinkCardService < BaseService
 
   def bad_url?(uri)
     # Avoid local instance URLs and invalid URLs
-    uri.host.blank? || TagManager.instance.local_url?(uri.to_s) || !%w(http https).include?(uri.scheme)
+    uri.host.blank? || !(TagManager.instance.local_url?(uri.to_s) && uri.to_s !~ /\/users\/[\w-_]+\/statuses\/(.*)/) || !%w(http https).include?(uri.scheme)
   end
 
   def skip_link?(a)
@@ -91,6 +91,7 @@ class FetchLinkCardService < BaseService
 
     case @card.type
     when 'link'
+    when 'quote'
       @card.image_remote_url = embed.thumbnail_url if embed.respond_to?(:thumbnail_url)
     when 'photo'
       return false unless embed.respond_to?(:url)
