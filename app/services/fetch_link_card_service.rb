@@ -89,11 +89,8 @@ class FetchLinkCardService < BaseService
     @card.width         = 0
     @card.height        = 0
 
-    @card.type = 'quote' if !(@url !~ %r(/users/[\w_-]+/statuses/.+))
-
     case @card.type
     when 'link'
-    when 'quote'
       @card.image_remote_url = embed.thumbnail_url if embed.respond_to?(:thumbnail_url)
     when 'photo'
       return false unless embed.respond_to?(:url)
@@ -113,6 +110,8 @@ class FetchLinkCardService < BaseService
     end
 
     @card.save_with_optional_image!
+    
+    @card.type = 'quote' if !(@url !~ %r(/users/[\w_-]+/statuses/.+))
   rescue OEmbed::NotFound
     false
   end
