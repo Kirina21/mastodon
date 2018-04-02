@@ -102,8 +102,6 @@ export default class Card extends React.PureComponent {
 
     if (card.get('type') === 'photo') {
       this.handlePhotoClick();
-    } else if (card.get('type') === 'quote') {
-      this.handleQuoteClick();
     } else {
       this.setState({ embedded: true });
     }
@@ -152,7 +150,7 @@ export default class Card extends React.PureComponent {
     const provider    = card.get('provider_name').length === 0 ? decodeIDNA(getHostname(card.get('url'))) : card.get('provider_name');
     const horizontal  = card.get('width') > card.get('height') && (card.get('width') + 100 >= width) || card.get('type') !== 'link';
     const className   = classnames('status-card', { horizontal });
-    const interactive = card.get('type') !== 'link';
+    const interactive = !['link', 'quote'].includes(card.get('type'));
     const title       = interactive ? <a className='status-card__title' href={card.get('url')} title={card.get('title')} rel='noopener' target='_blank'><strong>{card.get('title')}</strong></a> : <strong className='status-card__title' title={card.get('title')}>{card.get('title')}</strong>;
     const ratio       = card.get('width') / card.get('height');
     const height      = card.get('width') > card.get('height') ? (width / ratio) : (width * ratio);
@@ -203,6 +201,15 @@ export default class Card extends React.PureComponent {
         <div className='status-card__image'>
           {thumbnail}
         </div>
+      );
+    }
+
+    if (cart.get('type') === 'quote') {
+      return (
+        <a href={card.get('url')} className={className} onclick={this.handleQuoteClick} target='_blank' rel='noopener' ref={this.setRef}>
+          {embed}
+          {description}
+        </a>
       );
     }
 

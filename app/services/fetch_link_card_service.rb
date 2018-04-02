@@ -67,7 +67,7 @@ class FetchLinkCardService < BaseService
 
   def bad_url?(uri)
     # Avoid local instance URLs and invalid URLs
-    uri.host.blank? || (TagManager.instance.local_url?(uri.to_s) && uri.to_s !~ %r(/users/[\w_-]+/statuses/.+)) || !%w(http https).include?(uri.scheme)
+    uri.host.blank? || (TagManager.instance.local_url?(uri.to_s) && uri.to_s !~ %r(/users/[\w_-]+/statuses/\w+)) || !%w(http https).include?(uri.scheme)
   end
 
   def skip_link?(a)
