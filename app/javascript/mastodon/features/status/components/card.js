@@ -102,9 +102,20 @@ export default class Card extends React.PureComponent {
 
     if (card.get('type') === 'photo') {
       this.handlePhotoClick();
+    } else if (card.get('type') === 'quote') {
+      this.handleQuoteClick();
     } else {
       this.setState({ embedded: true });
     }
+  }
+
+  handleQuoteClick = e => {
+    const { card } = this.props;
+
+    e.preventDefault();
+
+    let url = card.get("url").replace(/(?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w-_]+\/(statuses\/.*)/, "$1");
+    this.context.router.history.push(url);
   }
 
   setRef = c => {

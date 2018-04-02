@@ -67,7 +67,7 @@ class FetchLinkCardService < BaseService
 
   def bad_url?(uri)
     # Avoid local instance URLs and invalid URLs
-    uri.host.blank? || !%w(http https).include?(uri.scheme)
+    uri.host.blank? || uri !~ %r(/users/[\w_-]+/statuses/.+) || !%w(http https).include?(uri.scheme)
   end
 
   def skip_link?(a)
@@ -88,6 +88,8 @@ class FetchLinkCardService < BaseService
     @card.provider_url  = embed.respond_to?(:provider_url)  ? embed.provider_url  : ''
     @card.width         = 0
     @card.height        = 0
+
+    @card.type = 'quote' if !(@url !~ %r(/users/[\w_-]+/statuses/.+))
 
     case @card.type
     when 'link'
