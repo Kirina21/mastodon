@@ -206,7 +206,7 @@ export default class Card extends React.PureComponent {
 
     if (card.get('type') === 'quote') {
       return (
-        <a href={card.get('url')} className={className} onclick={this.handleQuoteClick} target='_blank' rel='noopener' ref={this.setRef}>
+        <a href={card.get('url')} className={className} onClick={this.handleQuoteClick} target='_blank' rel='noopener' ref={this.setRef}>
           {embed}
           {description}
         </a>
