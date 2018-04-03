@@ -31,6 +31,8 @@ export default class StatusContent extends React.PureComponent {
     }
 
     const links = node.querySelectorAll('a');
+    const QuoteUrlFormat = /(?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w-_]+(\/statuses\/\w+)/;
+    const quote = node.innerText.match(new RegExp(`\\[(\\w+)\\]\\[${QuoteURLFormat.source}\\]`));
 
     for (var i = 0; i < links.length; ++i) {
       let link = links[i];
@@ -39,6 +41,12 @@ export default class StatusContent extends React.PureComponent {
       }
       link.classList.add('status-link');
 
+      if (quote) {
+        if (link.href.match(QuoteURLFormat)) {
+          link.addEventListener('click', this.onQuoteClick.bind(this, quote[1]), false);
+        }
+      }
+
       let mention = this.props.status.get('mentions').find(item => link.href === item.get('url'));
 
       if (mention) {
@@ -46,8 +54,6 @@ export default class StatusContent extends React.PureComponent {
         link.setAttribute('title', mention.get('acct'));
       } else if (link.textContent[0] === '#' || (link.previousSibling && link.previousSibling.textContent && link.previousSibling.textContent[link.previousSibling.textContent.length - 1] === '#')) {
         link.addEventListener('click', this.onHashtagClick.bind(this, link.text), false);
-      } else if (link.href.match(/(?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w-_]+\/statuses\/(.*)/)) {
-        link.addEventListener('click', this.onQuoteClick.bind(this, link.href), false);
       } else {
         link.setAttribute('title', link.href);
       }
@@ -81,8 +87,8 @@ export default class StatusContent extends React.PureComponent {
     }
   }
 
-  onQuoteClick = (statusUrl, e) => {
-    statusUrl = statusUrl.replace(/\[(\w+)\]\[(?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w-_]+(\/statuses\/\w+)\]/, "statuses/$1");
+  onQuoteClick = (statusId, e) => {
+    let statusUrl = `statuses/${statusId}`;
 
     if (this.context.router && e.button === 0) {
       e.preventDefault();
