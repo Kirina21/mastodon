@@ -71,7 +71,7 @@ export function quote(status) {
       changeCompose([
         "",
         "~~~~~~~~~~",
-        status.get("uri")
+        `[${status.get("id")}][${status.get("uri")}]`
       ].join("\n"))
     );
   };
