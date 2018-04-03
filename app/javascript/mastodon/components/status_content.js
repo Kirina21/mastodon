@@ -32,7 +32,7 @@ export default class StatusContent extends React.PureComponent {
 
     const links = node.querySelectorAll('a');
     const QuoteUrlFormat = /(?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w-_]+(\/statuses\/\w+)/;
-    const quote = node.innerText.match(new RegExp(`\\[(\\w+)\\]\\[${QuoteURLFormat.source}\\]`));
+    const quote = node.innerText.match(new RegExp(`\\[(\\w+)\\]\\[${QuoteUrlFormat.source}\\]`));
 
     for (var i = 0; i < links.length; ++i) {
       let link = links[i];
@@ -42,7 +42,7 @@ export default class StatusContent extends React.PureComponent {
       link.classList.add('status-link');
 
       if (quote) {
-        if (link.href.match(QuoteURLFormat)) {
+        if (link.href.match(QuoteUrlFormat)) {
           link.addEventListener('click', this.onQuoteClick.bind(this, quote[1]), false);
         }
       }
@@ -88,7 +88,7 @@ export default class StatusContent extends React.PureComponent {
   }
 
   onQuoteClick = (statusId, e) => {
-    let statusUrl = `statuses/${statusId}`;
+    let statusUrl = `/statuses/${statusId}`;
 
     if (this.context.router && e.button === 0) {
       e.preventDefault();
