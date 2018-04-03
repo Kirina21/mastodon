@@ -82,7 +82,7 @@ export default class StatusContent extends React.PureComponent {
   }
 
   onQuoteClick = (statusUrl, e) => {
-    statusUrl = statusUrl.replace(/(?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w-_]+\/statuses\/(.*)/, "/statuses/$1");
+    statusUrl = statusUrl.replace(/(?:https?|ftp):\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w-_]+(\/statuses\/.+)/, "$1");
 
     if (this.context.router && e.button === 0) {
       e.preventDefault();

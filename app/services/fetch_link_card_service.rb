@@ -109,9 +109,8 @@ class FetchLinkCardService < BaseService
       return false
     end
 
-    @card.save_with_optional_image!
-    
     @card.type = 'quote' if !(@url !~ %r(/users/[\w_-]+/statuses/.+))
+    @card.save_with_optional_image!
   rescue OEmbed::NotFound
     false
   end
