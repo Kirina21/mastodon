@@ -29,7 +29,7 @@ class PreviewCard < ApplicationRecord
 
   self.inheritance_column = false
 
-  enum type: [:link, :photo, :video, :rich, :quote]
+  enum type: [:link, :photo, :video, :rich]
 
   has_and_belongs_to_many :statuses
 
@@ -42,7 +42,7 @@ class PreviewCard < ApplicationRecord
   validates_attachment_content_type :image, content_type: IMAGE_MIME_TYPES
   validates_attachment_size :image, less_than: 1.megabytes
 
-  before_save :extract_dimensions, if: :link? || :quote?
+  before_save :extract_dimensions, if: :link?
 
   def save_with_optional_image!
     save!
