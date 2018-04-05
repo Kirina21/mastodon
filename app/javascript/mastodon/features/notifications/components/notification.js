@@ -129,23 +129,6 @@ export default class Notification extends ImmutablePureComponent {
     );
   }
 
-  renderQuote (notification, link) {
-    return (
-      <HotKeys handlers={this.getHandlers()}>
-        <div className='notification notification-quote focusable' tabIndex='0'>
-          <div className='notification__message'>
-            <div className='notification__favourite-icon-wrapper'>
-              <i className='fa fa-fw fa-quote-right' />
-            </div>
-            <FormattedMessage id='notification.quote' defaultMessage='{name} quoted your status' values={{ name: link }} />
-          </div>
-
-          <StatusContainer id={notification.get('status')} account={notification.get('account')} muted withDismiss hidden={this.props.hidden} />
-        </div>
-      </HotKeys>
-    );
-  }
-
   render () {
     const { notification } = this.props;
     const account          = notification.get('account');
@@ -161,8 +144,6 @@ export default class Notification extends ImmutablePureComponent {
       return this.renderFavourite(notification, link);
     case 'reblog':
       return this.renderReblog(notification, link);
-    case 'quote':
-      return this.renderQuote(notification, link);
     }
 
     return null;

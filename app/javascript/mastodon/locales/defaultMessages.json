@@ -1238,10 +1238,6 @@
       {
         "defaultMessage": "{name} boosted your status",
         "id": "notification.reblog"
-      },
-      {
-        "defaultMessage": "{name} quoted your status",
-        "id": "notification.quote"
       }
     ],
     "path": "app/javascript/mastodon/features/notifications/components/notification.json"

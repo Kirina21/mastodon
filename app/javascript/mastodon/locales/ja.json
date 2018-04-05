@@ -164,7 +164,6 @@
   "notification.follow": "{name}さんにフォローされました",
   "notification.mention": "{name}さんがあなたに返信しました",
   "notification.reblog": "{name}さんがあなたのトゥートをブーストしました",
-  "notification.quote": "{name}さんがあなたのトゥートを引用ブーストしました",
   "notifications.clear": "通知を消去",
   "notifications.clear_confirmation": "本当に通知を消去しますか？",
   "notifications.column_settings.alert": "デスクトップ通知",
