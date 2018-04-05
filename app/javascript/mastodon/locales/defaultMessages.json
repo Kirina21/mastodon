@@ -645,12 +645,20 @@
         "id": "privacy.unlisted.long"
       },
       {
-        "defaultMessage": "Following-only",
+        "defaultMessage": "Followers-only",
         "id": "privacy.private.short"
       },
       {
-        "defaultMessage": "Post to following users only",
+        "defaultMessage": "Post to followers only",
         "id": "privacy.private.long"
+      },
+      {
+        "defaultMessage": "Following-only",
+        "id": "privacy.limited.short"
+      },
+      {
+        "defaultMessage": "Post to following users only",
+        "id": "privacy.limited.long"
       },
       {
         "defaultMessage": "Direct",
@@ -794,12 +802,16 @@
   {
     "descriptors": [
       {
-        "defaultMessage": "This post is for following users. Only users you're following can view your private posts.",
+        "defaultMessage": "Your account is not {locked}. Anyone can follow you to view your follower-only posts.",
         "id": "compose_form.lock_disclaimer"
       },
       {
         "defaultMessage": "locked",
         "id": "compose_form.lock_disclaimer.lock"
+      },
+      {
+        "defaultMessage": "This post is for following users. Only users you're following can view your private posts.",
+        "id": "compose_form.limited_disclaimer"
       },
       {
         "defaultMessage": "This toot won't be listed under any hashtag as it is unlisted. Only public toots can be searched by hashtag.",

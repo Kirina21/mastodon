@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 
 const WarningWrapper = ({ needsLockWarning, hashtagWarning }) => {
   if (needsLockWarning) {
-    return <Warning message={<FormattedMessage id='compose_form.lock_disclaimer' defaultMessage='Your account is not {locked}. Anyone can follow you to view your follower-only posts.' values={{ locked: <a href='/settings/profile'><FormattedMessage id='compose_form.lock_disclaimer.lock' defaultMessage='locked' /></a> }} />} />;
+    return <Warning message={<FormattedMessage id='compose_form.limited_disclaimer' defaultMessage="This post is for following users. Only users you're following can view your private posts." />} />;
   }
   if (hashtagWarning) {
     return <Warning message={<FormattedMessage id='compose_form.hashtag_warning' defaultMessage="This toot won't be listed under any hashtag as it is unlisted. Only public toots can be searched by hashtag." />} />;
