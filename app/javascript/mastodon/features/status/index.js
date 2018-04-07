@@ -13,12 +13,12 @@ import {
   unfavourite,
   reblog,
   unreblog,
-  quote,
   pin,
   unpin,
 } from '../../actions/interactions';
 import {
   replyCompose,
+  quoteCompose,
   mentionCompose,
 } from '../../actions/compose';
 import { blockAccount } from '../../actions/accounts';
@@ -136,7 +136,7 @@ export default class Status extends ImmutablePureComponent {
   }
 
   handleQuoteClick = (status, e) => {
-    this.props.dispatch(quote(status));
+    this.props.dispatch(quoteCompose(status));
   }
 
   handleDeleteClick = (status) => {
