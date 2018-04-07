@@ -22,6 +22,7 @@ export const COMPOSE_REPLY           = 'COMPOSE_REPLY';
 export const COMPOSE_REPLY_CANCEL    = 'COMPOSE_REPLY_CANCEL';
 export const COMPOSE_MENTION         = 'COMPOSE_MENTION';
 export const COMPOSE_RESET           = 'COMPOSE_RESET';
+export const COMPOSE_QUOTE           = 'COMPOSE_QUOTE';
 export const COMPOSE_UPLOAD_REQUEST  = 'COMPOSE_UPLOAD_REQUEST';
 export const COMPOSE_UPLOAD_SUCCESS  = 'COMPOSE_UPLOAD_SUCCESS';
 export const COMPOSE_UPLOAD_FAIL     = 'COMPOSE_UPLOAD_FAIL';
@@ -82,6 +83,19 @@ export function resetCompose() {
     type: COMPOSE_RESET,
   };
 };
+
+export function quoteCompose(status, router) {
+  return (dispatch, getState) => {
+    dispatch({
+      type: COMPOSE_QUOTE,
+      status: status,
+    });
+
+    if (!getState().getIn(['compose', 'mounted'])) {
+      router.push('/statuses/new');
+    }
+  };
+}
 
 export function mentionCompose(account, router) {
   return (dispatch, getState) => {

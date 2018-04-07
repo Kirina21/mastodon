@@ -4,6 +4,7 @@ import Status from '../components/status';
 import { makeGetStatus } from '../selectors';
 import {
   replyCompose,
+  quoteCompose,
   mentionCompose,
 } from '../actions/compose';
 import {
@@ -11,7 +12,6 @@ import {
   favourite,
   unreblog,
   unfavourite,
-  quote,
   pin,
   unpin,
 } from '../actions/interactions';
@@ -67,8 +67,8 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
     }
   },
 
-  onQuote (status, e) {
-    dispatch(quote(status))
+  onQuote (status, router) {
+    dispatch(quoteCompose(status, router));
   },
 
   onFavourite (status) {

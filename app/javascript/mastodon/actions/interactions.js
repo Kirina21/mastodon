@@ -1,7 +1,4 @@
 import api from '../api';
-import {
-  changeCompose,
-} from '../actions/compose'
 
 export const REBLOG_REQUEST = 'REBLOG_REQUEST';
 export const REBLOG_SUCCESS = 'REBLOG_SUCCESS';
@@ -18,8 +15,6 @@ export const UNREBLOG_FAIL    = 'UNREBLOG_FAIL';
 export const UNFAVOURITE_REQUEST = 'UNFAVOURITE_REQUEST';
 export const UNFAVOURITE_SUCCESS = 'UNFAVOURITE_SUCCESS';
 export const UNFAVOURITE_FAIL    = 'UNFAVOURITE_FAIL';
-
-export const QUOTE = 'QUOTE';
 
 export const REBLOGS_FETCH_REQUEST = 'REBLOGS_FETCH_REQUEST';
 export const REBLOGS_FETCH_SUCCESS = 'REBLOGS_FETCH_SUCCESS';
@@ -62,20 +57,6 @@ export function unreblog(status) {
     });
   };
 };
-
-export function quote(status) {
-  return (dispatch, getState) => {
-    dispatch(quoteRequest(status));
-
-    dispatch(
-      changeCompose([
-        "",
-        "~~~~~~~~~~",
-        `[${status.get("id")}][${status.get("uri")}]`
-      ].join("\n"))
-    );
-  };
-}
 
 export function reblogRequest(status) {
   return {
@@ -126,13 +107,6 @@ export function unreblogFail(status, error) {
     status: status,
     error: error,
     skipLoading: true,
-  };
-};
-
-export function quoteRequest(status) {
-  return {
-    type: QUOTE,
-    status: status
   };
 };
 

@@ -81,7 +81,7 @@ export default class StatusActionBar extends ImmutablePureComponent {
   }
 
   handleQuoteClick = (e) => {
-    this.props.onQuote(this.props.status);
+    this.props.onQuote(this.props.status, this.context.router.history);
   }
 
   handleDeleteClick = () => {

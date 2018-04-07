@@ -108,8 +108,7 @@ class FetchLinkCardService < BaseService
       # Most providers rely on <script> tags, which is a no-no
       return false
     end
-
-    @card.type = 'quote' if !(@url !~ %r(/users/[\w_-]+/statuses/\w+))
+    
     @card.save_with_optional_image!
   rescue OEmbed::NotFound
     false
