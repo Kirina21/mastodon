@@ -245,7 +245,6 @@ export default function compose(state = initialState, action) {
       map.set('text', [
         "",
         "~~~~~~~~~~",
-        action.status.get("uri")
         `[${action.status.get("id")}][${action.status.get("uri")}]`
       ].join("\n"));
 
