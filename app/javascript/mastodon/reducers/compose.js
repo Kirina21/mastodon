@@ -5,6 +5,7 @@ import {
   COMPOSE_REPLY,
   COMPOSE_REPLY_CANCEL,
   COMPOSE_QUOTE,
+  COMPOSE_QUOTE_CANCEL,
   COMPOSE_MENTION,
   COMPOSE_SUBMIT_REQUEST,
   COMPOSE_SUBMIT_SUCCESS,
@@ -230,7 +231,19 @@ export default function compose(state = initialState, action) {
         map.set('spoiler_text', '');
       }
     });
+  case COMPOSE_QUOTE:
+    return state.withMutations(map => {
+      map.set('in_reply_to', action.status.get('id'));
+      map.set('text', [
+        "",
+        "~~~~~~~~~~",
+        `[${action.status.get("id")}][${action.status.get("uri")}]`
+      ].join("\n"));
+
+      map.set('idempotencyKey', uuid());
+    });
   case COMPOSE_REPLY_CANCEL:
+  case COMPOSE_QUOTE_CANCEL:
   case COMPOSE_RESET:
     return state.withMutations(map => {
       map.set('in_reply_to', null);
@@ -238,16 +251,6 @@ export default function compose(state = initialState, action) {
       map.set('spoiler', false);
       map.set('spoiler_text', '');
       map.set('privacy', state.get('default_privacy'));
-      map.set('idempotencyKey', uuid());
-    });
-  case COMPOSE_QUOTE:
-    return state.withMutations(map => {
-      map.set('text', [
-        "",
-        "~~~~~~~~~~",
-        `[${action.status.get("id")}][${action.status.get("uri")}]`
-      ].join("\n"));
-
       map.set('idempotencyKey', uuid());
     });
   case COMPOSE_SUBMIT_REQUEST:
