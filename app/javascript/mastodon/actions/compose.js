@@ -4,6 +4,7 @@ import { throttle } from 'lodash';
 import { search as emojiSearch } from '../features/emoji/emoji_mart_search_light';
 import { tagHistory } from '../settings';
 import { useEmoji } from './emojis';
+import { makeGetStatus } from '../selectors';
 
 import {
   updateTimeline,
@@ -119,11 +120,20 @@ export function mentionCompose(account, router) {
 
 export function submitCompose() {
   return function (dispatch, getState) {
-    const status = getState().getIn(['compose', 'text'], '');
+    let status = getState().getIn(['compose', 'text'], '');
     const media  = getState().getIn(['compose', 'media_attachments']);
+    const quoteId = getState().getIn(['compose', 'quote_from'], null);
 
     if ((!status || !status.length) && media.size === 0) {
       return;
+    }
+
+    if (quoteId) {
+      status = [
+        status,
+        "~~~~~~~~~~",
+        `[${quoteId}]][${getState().getIn(['compose', 'quote_from_uri'], null)}]`
+      ].join("\n");
     }
 
     dispatch(submitComposeRequest());

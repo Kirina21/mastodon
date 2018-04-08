@@ -220,6 +220,7 @@ export default function compose(state = initialState, action) {
     return state.withMutations(map => {
       map.set('in_reply_to', action.status.get('id'));
       map.set('quote_from', null);
+      map.set('quote_from_uri', null);
       map.set('text', statusToTextMentions(state, action.status));
       map.set('privacy', privacyPreference(action.status.get('visibility'), state.get('default_privacy')));
       map.set('focusDate', new Date());
@@ -238,12 +239,8 @@ export default function compose(state = initialState, action) {
     return state.withMutations(map => {
       map.set('in_reply_to', null);
       map.set('quote_from', action.status.get('id'));
-      map.set('text', [
-        "",
-        "~~~~~~~~~~",
-        `[${action.status.get("id")}][${action.status.get("uri")}]`
-      ].join("\n"));
-
+      map.set('quote_from_uri', action.status.get('uri'));
+      map.set('text', '');
       map.set('privacy', privacyPreference(action.status.get('visibility'), state.get('default_privacy')));
       map.set('focusDate', new Date());
       map.set('preselectDate', new Date());
@@ -255,6 +252,7 @@ export default function compose(state = initialState, action) {
     return state.withMutations(map => {
       map.set('in_reply_to', null);
       map.set('quote_from', null);
+      map.set('quote_from_uri', null);
       map.set('text', '');
       map.set('spoiler', false);
       map.set('spoiler_text', '');
