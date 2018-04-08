@@ -223,6 +223,6 @@ class Formatter
   end
 
   def quote_html(html)
-    html.gsub(/(\[\w+\])(\[(?:https?|ftp):\/\/[\-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w\-_]+(?:\/statuses\/\w+)\])/, "<span class=\"invisible\">\\1</span>\\2")
+    encode(html.gsub(/(\[\w+\])(\[(?:https?|ftp):\/\/[\-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w\-_]+(?:\/statuses\/\w+)\])/, "<span class=\"invisible\">\\1</span>\\2"))
   end
 end
