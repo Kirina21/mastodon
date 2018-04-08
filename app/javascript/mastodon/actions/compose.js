@@ -132,7 +132,7 @@ export function submitCompose() {
       status = [
         status,
         "~~~~~~~~~~",
-        `[${quoteId}]][${getState().getIn(['compose', 'quote_from_uri'], null)}]`
+        `[${quoteId}][${getState().getIn(['compose', 'quote_from_uri'], null)}]`
       ].join("\n");
     }
 
