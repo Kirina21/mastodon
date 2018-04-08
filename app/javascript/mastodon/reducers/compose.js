@@ -49,6 +49,7 @@ const initialState = ImmutableMap({
   focusDate: null,
   preselectDate: null,
   in_reply_to: null,
+  quote_from: null,
   is_composing: false,
   is_submitting: false,
   is_uploading: false,
@@ -80,6 +81,7 @@ function clearAll(state) {
     map.set('spoiler_text', '');
     map.set('is_submitting', false);
     map.set('in_reply_to', null);
+    map.set('quote_from', null);
     map.set('privacy', state.get('default_privacy'));
     map.set('sensitive', false);
     map.update('media_attachments', list => list.clear());
@@ -240,6 +242,9 @@ export default function compose(state = initialState, action) {
         `[${action.status.get("id")}][${action.status.get("uri")}]`
       ].join("\n"));
 
+      map.set('privacy', privacyPreference(action.status.get('visibility'), state.get('default_privacy')));
+      map.set('focusDate', new Date());
+      map.set('preselectDate', new Date());
       map.set('idempotencyKey', uuid());
     });
   case COMPOSE_REPLY_CANCEL:
@@ -247,6 +252,7 @@ export default function compose(state = initialState, action) {
   case COMPOSE_RESET:
     return state.withMutations(map => {
       map.set('in_reply_to', null);
+      map.set('quote_from', null);
       map.set('text', '');
       map.set('spoiler', false);
       map.set('spoiler_text', '');
