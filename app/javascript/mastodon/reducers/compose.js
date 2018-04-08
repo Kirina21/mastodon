@@ -50,6 +50,7 @@ const initialState = ImmutableMap({
   preselectDate: null,
   in_reply_to: null,
   quote_from: null,
+  quote_from_uri: null,
   is_composing: false,
   is_submitting: false,
   is_uploading: false,
