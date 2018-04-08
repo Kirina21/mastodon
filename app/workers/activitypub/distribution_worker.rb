@@ -21,7 +21,7 @@ class ActivityPub::DistributionWorker
   private
 
   def skip_distribution?
-    @status.private_visibility? || @status.direct_visibility?
+    @status.limited_visibility? || @status.direct_visibility?
   end
 
   def inboxes
