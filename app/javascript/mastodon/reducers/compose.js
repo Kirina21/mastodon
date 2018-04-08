@@ -219,6 +219,7 @@ export default function compose(state = initialState, action) {
   case COMPOSE_REPLY:
     return state.withMutations(map => {
       map.set('in_reply_to', action.status.get('id'));
+      map.set('quote_from', null);
       map.set('text', statusToTextMentions(state, action.status));
       map.set('privacy', privacyPreference(action.status.get('visibility'), state.get('default_privacy')));
       map.set('focusDate', new Date());
@@ -235,6 +236,7 @@ export default function compose(state = initialState, action) {
     });
   case COMPOSE_QUOTE:
     return state.withMutations(map => {
+      map.set('in_reply_to', null);
       map.set('quote_from', action.status.get('id'));
       map.set('text', [
         "",
