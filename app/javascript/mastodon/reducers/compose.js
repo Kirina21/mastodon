@@ -151,6 +151,8 @@ const insertEmoji = (state, position, emojiData) => {
 const privacyPreference = (a, b) => {
   if (a === 'direct' || b === 'direct') {
     return 'direct';
+  } else if (a === 'limited' || b === 'limited') {
+    return 'limited';
   } else if (a === 'private' || b === 'private') {
     return 'private';
   } else if (a === 'unlisted' || b === 'unlisted') {
