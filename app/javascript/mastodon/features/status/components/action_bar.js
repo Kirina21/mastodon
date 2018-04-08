@@ -57,8 +57,8 @@ export default class ActionBar extends React.PureComponent {
     this.props.onReblog(this.props.status, e);
   }
 
-  handleQuoteClick = (e) => {
-    this.props.onQuote(this.props.status);
+  handleQuoteClick = () => {
+    this.props.onQuote(this.props.status, this.context.router.history);
   }
 
   handleFavouriteClick = () => {

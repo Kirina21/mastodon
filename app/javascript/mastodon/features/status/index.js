@@ -135,8 +135,8 @@ export default class Status extends ImmutablePureComponent {
     }
   }
 
-  handleQuoteClick = (status, e) => {
-    this.props.dispatch(quoteCompose(status));
+  handleQuoteClick = (status) => {
+    this.props.dispatch(quoteCompose(status, this.context.router.history));
   }
 
   handleDeleteClick = (status) => {

@@ -80,7 +80,7 @@ export default class StatusActionBar extends ImmutablePureComponent {
     this.props.onReblog(this.props.status, e);
   }
 
-  handleQuoteClick = (e) => {
+  handleQuoteClick = () => {
     this.props.onQuote(this.props.status, this.context.router.history);
   }
 
