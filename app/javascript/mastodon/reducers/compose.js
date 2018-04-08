@@ -233,7 +233,7 @@ export default function compose(state = initialState, action) {
     });
   case COMPOSE_QUOTE:
     return state.withMutations(map => {
-      map.set('in_reply_to', action.status.get('id'));
+      map.set('quote_from', action.status.get('id'));
       map.set('text', [
         "",
         "~~~~~~~~~~",
