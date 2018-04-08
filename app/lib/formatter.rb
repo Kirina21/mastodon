@@ -32,7 +32,6 @@ class Formatter
 
     html = raw_content
     html = "RT @#{prepend_reblog} #{html}" if prepend_reblog
-    html = quote_html(html).html_safe
     html = encode_and_link_urls(html, linkable_accounts)
     html = encode_custom_emojis(html, status.emojis) if options[:custom_emojify]
     html = simple_format(html, {}, sanitize: false)
@@ -220,9 +219,5 @@ class Formatter
 
   def mention_html(account)
     "<span class=\"h-card\"><a href=\"#{TagManager.instance.url_for(account)}\" class=\"u-url mention\">@<span>#{account.username}</span></a></span>"
-  end
-
-  def quote_html(html)
-    html.gsub(/(\[\w+\])(\[(?:https?|ftp):\/\/[\-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+\/users\/[\w\-_]+(?:\/statuses\/\w+)\])/, "<span class=\"invisible\">\\1</span>\\2").html_safe
   end
 end
