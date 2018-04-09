@@ -33,7 +33,7 @@ class Status < ApplicationRecord
 
   update_index('statuses#status', :proper) if Chewy.enabled?
 
-  enum visibility: [:public, :unlisted, :private, :direct], _suffix: :visibility
+  enum visibility: [:public, :unlisted, :private, :limited, :direct], _suffix: :visibility
 
   belongs_to :application, class_name: 'Doorkeeper::Application', optional: true
 
@@ -248,6 +248,8 @@ class Status < ApplicationRecord
         # followers can see followers-only stuff, but also things they are mentioned in.
         # non-followers can see everything that isn't private/direct, but can see stuff they are mentioned in.
         visibility.push(:private) if account.following?(target_account)
+        # followed users can see limited toots.
+        visibility.push(:limited) if account.following?(target_account) && account.followed_by?(target_account)
 
         where(visibility: visibility).or(where(id: account.mentions.select(:status_id)))
       end
