@@ -9,12 +9,16 @@ const APPROX_HASHTAG_RE = /(?:^|[^\/\)\w])#(\w*[a-zA-Z·]\w*)/i;
 
 const mapStateToProps = state => ({
   needsLockWarning: state.getIn(['compose', 'privacy']) === 'private' && !state.getIn(['accounts', me, 'locked']),
+  needsLimitedWarning: state.getIn(['compose', 'privacy']) === 'limited',
   hashtagWarning: state.getIn(['compose', 'privacy']) !== 'public' && APPROX_HASHTAG_RE.test(state.getIn(['compose', 'text'])),
 });
 
-const WarningWrapper = ({ needsLockWarning, hashtagWarning }) => {
+const WarningWrapper = ({ needsLockWarning, needsLimitedWarning, hashtagWarning }) => {
   if (needsLockWarning) {
     return <Warning message={<FormattedMessage id='compose_form.lock_disclaimer' defaultMessage='Your account is not {locked}. Anyone can follow you to view your follower-only posts.' values={{ locked: <a href='/settings/profile'><FormattedMessage id='compose_form.lock_disclaimer.lock' defaultMessage='locked' /></a> }} />} />;
+  }
+  if (needsLimitedWarning) {
+    return <Warning message={<FormattedMessage id='compose_form.limited_disclaimer' defaultMessage="This post is for followed users. Only users you're following can view ones." />} />;
   }
   if (hashtagWarning) {
     return <Warning message={<FormattedMessage id='compose_form.hashtag_warning' defaultMessage="This toot won't be listed under any hashtag as it is unlisted. Only public toots can be searched by hashtag." />} />;
@@ -25,6 +29,7 @@ const WarningWrapper = ({ needsLockWarning, hashtagWarning }) => {
 
 WarningWrapper.propTypes = {
   needsLockWarning: PropTypes.bool,
+  needsLimitedWarning: PropTypes.bool,
   hashtagWarning: PropTypes.bool,
 };
 
