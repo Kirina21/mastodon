@@ -653,6 +653,14 @@
         "id": "privacy.private.long"
       },
       {
+        "defaultMessage": "Limited",
+        "id": "privacy.limited.short"
+      },
+      {
+        "defaultMessage": "Post to followed users only",
+        "id": "privacy.limited.long"
+      },
+      {
         "defaultMessage": "Direct",
         "id": "privacy.direct.short"
       },

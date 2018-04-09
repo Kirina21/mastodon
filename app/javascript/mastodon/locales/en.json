@@ -199,6 +199,8 @@
   "privacy.change": "Adjust status privacy",
   "privacy.direct.long": "Post to mentioned users only",
   "privacy.direct.short": "Direct",
+  "privacy.limited.long": "Post to followed users only",
+  "privacy.limited.short": "Limited",
   "privacy.private.long": "Post to followers only",
   "privacy.private.short": "Followers-only",
   "privacy.public.long": "Post to public timelines",
