@@ -249,7 +249,7 @@ class Status < ApplicationRecord
         # non-followers can see everything that isn't private/direct, but can see stuff they are mentioned in.
         visibility.push(:private) if account.following?(target_account)
         # followed users can see limited toots.
-        visibility.push(:limited) if account.followed_by?(target_account)
+        visibility.push(:limited) if account.following?(target_account) && account.followed_by?(target_account)
 
         where(visibility: visibility).or(where(id: account.mentions.select(:status_id)))
       end
